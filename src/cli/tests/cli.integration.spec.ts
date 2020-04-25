@@ -12,8 +12,6 @@
  *
  * `diff build/test-one/package.json build/test-two/package.json`
  */
-
-// tslint:disable:no-expression-statement
 import test, { ExecutionContext } from 'ava';
 import del from 'del';
 import execa from 'execa';
@@ -21,10 +19,13 @@ import globby from 'globby';
 import md5File from 'md5-file';
 import meow from 'meow';
 import { join, relative } from 'path';
+
 import { cloneRepo, Placeholders, Tasks } from '../tasks';
 import { typescriptStarter } from '../typescript-starter';
 import { normalizePath, Runner } from '../utils';
 
+
+// tslint:disable:no-expression-statement
 /**
  * NOTE: many of the tests below validate file modification. The filesystem is
  * not mocked, and these tests make real changes. Proceed with caution.
@@ -262,11 +263,11 @@ async function testInteractive(
   // https://nodejs.org/api/process.html#process_process_stdin
   // proc.stdin.setEncoding('utf8');
 
-  const type = (input: string) => proc.stdin.write(input);
+  const type = (input: string) => proc.stdin?.write(input);
 
   // wait for first chunk to be emitted
   await new Promise(resolve => {
-    proc.stdout.once('data', resolve);
+    proc.stdout?.once('data', resolve);
   });
   await ms(200);
   type(`${projectName}${enter}`);
@@ -364,7 +365,7 @@ test(`${TestDirectories.four}: interactive mode: node.js application`, async t =
 });
 
 const sandboxTasks = (
-  t: ExecutionContext<{}>,
+  t: ExecutionContext<any>,
   commit: boolean,
   install: boolean
 ): Tasks => {
