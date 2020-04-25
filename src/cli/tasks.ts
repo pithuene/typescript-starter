@@ -2,12 +2,8 @@
 import execa, { Options } from 'execa';
 import githubUsername from 'github-username';
 import { join } from 'path';
-import {
-  Runner,
-  TypescriptStarterInferredOptions,
-  TypescriptStarterOptions,
-  TypescriptStarterUserOptions
-} from './utils';
+
+import { Runner, TypescriptStarterInferredOptions, TypescriptStarterOptions, TypescriptStarterUserOptions } from './utils';
 
 export enum Placeholders {
   email = 'YOUR_EMAIL',
@@ -159,7 +155,7 @@ export const getRepoInfo = (starterVersion: string) => {
       }
     : {
         branch: `v${starterVersion}`,
-        repo: 'https://github.com/bitjson/typescript-starter.git'
+        repo: 'https://github.com/pithuene/typescript-starter.git'
       };
 };
 
